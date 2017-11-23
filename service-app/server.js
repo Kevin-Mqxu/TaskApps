@@ -3,6 +3,9 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var app = express();
 
+//serve deployed vue app
+app.use(express.static('vue_dist'));
+
 app.use(function (req, res, next) {
     console.log("cache middleware.");
     res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
