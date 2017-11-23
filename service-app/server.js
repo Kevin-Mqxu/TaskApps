@@ -1,6 +1,17 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 var app = express();
+
+app.use(function (req, res, next) {
+    console.log("cache middleware.");
+    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    res.header('Expires', '-1');
+    res.header('Pragma', 'no-cache');
+    next();
+});
+
+app.use(cors());
 var jasonParser = bodyParser.json();
 
 var Datastore = require('nedb');
@@ -23,10 +34,10 @@ app.get('/', function (req, res) {
 app.post('/tasks', jasonParser, function(req, res){
     if (!req.body) return res.status(403).send("Invalid data.");
     console.log("Creating task:" + req.body);
-    db.insert(req.body, err => {
+    db.insert(req.body, (err, newDoc) => {
         if (!err) {
             console.log("Created.");
-            res.sendStatus(200);
+            res.status(200).send(newDoc);
         }
         else {
             console.log(err);

@@ -85,6 +85,7 @@ program
     prompt(questions)
     .then(answers => {
         var url = answers._id === 'all'? answers.url : answers.url + '/' + answers._id;
+        console.log(url);
         axios
         .get(url)
         .then(response => {
