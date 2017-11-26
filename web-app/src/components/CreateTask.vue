@@ -1,25 +1,23 @@
 <template>
-  <div class='ui basic content center aligned segment'>
-    <button class='ui basic button icon' v-on:click="openForm" v-show="!isCreating">
-      <i class='plus icon'></i>
+  <div class="container">
+    <button class='btn btn-primary' v-on:click="openForm()" v-show="!isCreating">
+      <i class="fa fa-plus" aria-hidden="true"></i><span> Create a new task</span>
     </button>
-    <div class='ui centered card' v-show="isCreating">
-      <div class='content'>
-        <div class='ui form'>
-          <div class='field'>
-            <label>Title</label>
-            <input v-model="titleText" type='text' ref='title' defaultValue="">
+    <div class='container' v-show="isCreating">
+          <div class='form-group'>
+            <label for="inputTitle">Title</label>
+            <input v-model="titleText" type='text' id="inputTitle" defaultValue="">
           </div>
-          <div class='field'>
-            <label>Description</label>
-            <input v-model="descriptionText" type='text' ref='title' defaultValue="">
+          <div class='form-group'>
+            <label for="inputDescription">Description</label>
+            <input v-model="descriptionText" type='text' id="inputDescription" defaultValue="">
           </div>
-          <div class='ui two button attached buttons'>
-            <button class='ui basic blue button' v-on:click="sendForm()">
-              Create
+          <div class="btn-group" role="group">
+            <button class='btn btn-primary' v-on:click="sendForm()">
+              <i class="fa fa-check" aria-hidden="true"></i><span>Create</span>
             </button>
-            <button class='ui basic red button' v-on:click="closeForm">
-              Cancel
+            <button class='btn btn-primary' v-on:click="closeForm()">
+              <i class="fa fa-times" aria-hidden="true"></i><span>Cancel</span>
             </button>
           </div>
         </div>
